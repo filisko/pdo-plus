@@ -8,7 +8,8 @@
         "psr-4": {"Filisko\\PDOplus\\": "src/"}
     },
     "suggest": {
-        "jdorn/sql-formatter": ">=1.2"
+        "jdorn/sql-formatter": "Highlight the SQL logged queries",
+        "tracy/tracy": "Install Tracy if you want to provided Bar Panel to see the logged queries"
     },
     "authors": [
         {
