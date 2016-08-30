@@ -1,5 +1,5 @@
 <?php
-namespace app\classes\libraries\PDOplus;
+namespace Filisko\PDOplus;
 
 class PDO extends \PDO
 {
@@ -31,7 +31,7 @@ class PDO extends \PDO
     public function prepare($statement, $driver_options = [])
     {
         $PDOStatement = parent::prepare($statement, $driver_options);
-        $new = new \app\classes\libraries\PDOplus\PDOStatement($this, $PDOStatement);
+        $new = new \Filisko\PDOplus\PDOStatement($this, $PDOStatement);
         return $new;
     }
 
