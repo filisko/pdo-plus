@@ -8,7 +8,7 @@
         "psr-4": {"Filisko\\PDOplus\\": "src/"}
     },
     "suggest": {
-        "jdorn/sql-formatter": ">=1.2",
+        "jdorn/sql-formatter": ">=1.2"
     },
     "authors": [
         {
