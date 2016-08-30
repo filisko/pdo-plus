@@ -1,6 +1,6 @@
 # PDO plus
 
-PDO plus is a wrapper for PDO which will allow you to see all your executed queries, it will also try to simulate bind queries. It also includes a Bar Panel for Tracy, see the result below.
+PDO plus extends PDO to allow you to see all your executed queries. It also includes a Bar Panel for Tracy, see the result below.
 
 ## Result
 ![PDO logger with Tracy](https://i.snag.gy/AbESVC.jpg "PDO logger with Tracy")
