@@ -18,10 +18,8 @@ $pdo = new \Filisko\PDOplus\PDO('mysql:host=127.0.0.1;dbname=my_db', 'my_user', 
 
 // ... our PDO queries ...
 
-
 // Dump all our executed queries
 var_dump($pdo->getLog());
-
 
 // Create an instance for Tracy Bar Panel and pass the PDO instance
 $panel = new \Filisko\PDOplus\Tracy\BarPanel($pdo);
