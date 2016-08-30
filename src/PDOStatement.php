@@ -1,5 +1,5 @@
 <?php
-namespace app\classes\libraries\PDOplus;
+namespace Filisko\PDOplus;
 
 class PDOStatement
 {
@@ -27,7 +27,7 @@ class PDOStatement
      * @param Pdo           $pdo       The PDO logging class instance.
      * @param \PDOStatement $statement The original prepared statement.
      */
-    public function __construct(\app\classes\libraries\PDOplus\PDO $pdo, \PDOStatement $PDOStatement)
+    public function __construct(\Filisko\PDOplus\PDO $pdo, \PDOStatement $PDOStatement)
     {
         $this->pdo = $pdo;
         $this->PDOStatement = $PDOStatement;
