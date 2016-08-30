@@ -1,5 +1,5 @@
 <?php
-namespace app\classes\libraries\PDOplus\Tracy;
+namespace Filisko\PDOplus\Tracy;
 
 class BarPanel implements \Tracy\IBarPanel
 {
@@ -43,7 +43,7 @@ class BarPanel implements \Tracy\IBarPanel
      */
     protected $queries;
 
-    public function __construct(\app\classes\libraries\PDOplus\PDO $pdo)
+    public function __construct(\Filisko\PDOplus\PDO $pdo)
     {
         $this->queries = $pdo->getLog();
     }
