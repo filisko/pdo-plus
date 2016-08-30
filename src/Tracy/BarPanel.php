@@ -77,7 +77,9 @@ class BarPanel implements \Tracy\IBarPanel
 	 */
     public function getPanel()
     {
-       \SqlFormatter::$pre_attributes = 'style="color: black;"';
+        if (class_exists('\SqlFormatter')) {
+            \SqlFormatter::$pre_attributes = 'style="color: black;"';
+        }
         $queries = $this->queries;
         $html = '<h1 '.self::$title_attributes.'>'.self::$title.'</h1>';
         $html .= '<div class="tracy-inner tracy-InfoPanel">';
@@ -90,7 +92,11 @@ class BarPanel implements \Tracy\IBarPanel
             foreach ($queries as $query) {
                 $html .= '<tr>';
                 $html .= '<td><span '.self::$time_attributes.'>'.round($query['time'], 4).'</span></td>';
-                $html .= '<td>'.\SqlFormatter::highlight($query['statement']).'</td>';
+                if (class_exists('\SqlFormatter')) {
+                    $html .= '<td>'.\SqlFormatter::highlight($query['statement']).'</td>';
+                } else {
+                    $html .= '<td '.self::$query_attributes.'>'.$query['statement'].'</td>';
+                }
                 $html .= '</tr>';
             }
             $html .= '</table>';
