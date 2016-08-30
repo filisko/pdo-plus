@@ -1,6 +1,6 @@
 {
     "name": "filisko/pdo-plus",
-    "description": "PDO plus is a PDO wrapper that supports query logging, as simple as that",
+    "description": "PDO plus extends PDO to allow you to see all your executed queries. It also includes a Bar Panel for Tracy",
     "keywords": ["pdo", "logging", "queries", "tracy"],
     "type": "package",
     "license": "MIT",
