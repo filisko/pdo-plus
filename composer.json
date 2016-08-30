@@ -1,0 +1,16 @@
+{
+    "name": "filisko/pdo-plus",
+    "description": "PDO plus is a PDO wrapper that supports query logging, as simple as that",
+    "keywords": ["pdo", "logging", "queries", "tracy"],
+    "type": "package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {"Filisko\\PDOplus\\": "src/"}
+    },
+    "authors": [
+        {
+            "name": "Filisko",
+            "email": "filisfutsarov@gmail.com"
+        }
+    ]
+}
