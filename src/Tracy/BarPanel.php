@@ -25,10 +25,16 @@ class BarPanel implements \Tracy\IBarPanel
     public static $title_attributes = 'style="font-size:1.6em"';
 
     /**
-     * Time HTML attributes
+     * Time table cell HTML attributes
      * @var string
      */
     public static $time_attributes = 'style="font-weight:bold;color:#333;font-family:Courier New;font-size:1.1em"';
+    
+    /**
+     * Query table cell HTML attributes
+     * @var string
+     */
+    public static $query_attributes = '';
 
     /**
      * PDO logged queries
