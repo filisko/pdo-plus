@@ -12,18 +12,27 @@ Install it via composer:
 
 ## How to use
 
+In this example we are using two different PDO instances just to show that it's doable.
+
 ```php
 // Create an instance using PDO plus
-$pdo = new \Filisko\PDOplus\PDO('mysql:host=127.0.0.1;dbname=my_db', 'my_user', 'my_pass');
+$pdoConnection1 = new \Filisko\PDOplus\PDO('mysql:host=127.0.0.1;dbname=my_db', 'my_user', 'my_pass');
+$pdoConnection2 = new \Filisko\PDOplus\PDO('mysql:host=127.0.0.1;dbname=my_other_db', 'my_user', 'my_pass');
 
 // ... our PDO queries ...
 
-// Dump all our executed queries
-var_dump($pdo->getLog());
+// Dump all our executed queries of PDO connection 1
+var_dump($pdoConnection1->getLog());
 
-// Create an instance for Tracy Bar Panel and pass the PDO instance
-$panel = new \Filisko\PDOplus\Tracy\BarPanel($pdo);
+// Instance for Tracy BarPanel for connection 1
+$db1Panel = new \Filisko\PDOplus\Tracy\BarPanel($pdoConnection1);
+$db1Panel->title = "DB 1 Panel";
 
-// We add the panel to Tracy
-\Tracy\Debugger::getBar()->addPanel($panel);
+// Instance for Tracy BarPanel for connection 2
+$db2Panel = new \Filisko\PDOplus\Tracy\BarPanel($pdoConnection2);
+$db2Panel->title = "DB 2 Panel";
+
+// Add panels to Tracy Bar
+\Tracy\Debugger::getBar()->addPanel($db1Panel);
+\Tracy\Debugger::getBar()->addPanel($db2Panel);
 ```
