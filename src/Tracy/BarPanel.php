@@ -67,7 +67,7 @@ class BarPanel implements \Tracy\IBarPanel
         $queries = count($this->queries);
         if ($queries == 0) {
             $html .= 'no queries!';
-            return $title;
+            return $html;
         } elseif ($queries == 1) {
             $html .= '1 query';
         } else {
