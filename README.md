@@ -8,7 +8,9 @@ PDO plus extends PDO to allow you to see all your executed queries. It also incl
 ## Installation
 Install it via composer:
 
-`composer require filisko/pdo-plus`
+```shell
+composer require filisko/pdo-plus
+```
 
 ## How to use
 
