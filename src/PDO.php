@@ -59,13 +59,14 @@ class PDO extends \PDO
 
     /**
      * Add query to logged queries.
-     * @param string $query
+     * @param string $statement
+     * @param float $time Elapsed seconds with microseconds
      */
     public function addLog($statement, $time)
     {
         $query = [
             'statement' => $statement,
-            'time' => $time
+            'time' => $time * 1000
         ];
         array_push($this->log, $query);
     }
