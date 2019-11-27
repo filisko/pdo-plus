@@ -86,15 +86,15 @@ class PDOStatement
 
         $bindings = $this->bindings;
         $statement = $this->PDOStatement->queryString;
-		$indexed = ($bindings == array_values($bindings));
+        $indexed = ($bindings == array_values($bindings));
         foreach($bindings as $param => $value) {
-			$value = (is_numeric($value) or is_null($value)) ? $value : $this->pdo->quote($value);
-			$value = is_null($value) ? "null" : $value;
+            $value = (is_numeric($value) or is_null($value)) ? $value : $this->pdo->quote($value);
+            $value = is_null($value) ? "null" : $value;
             if($indexed){
-				$statement = preg_replace('/\?/', $value, $statement, 1);
-			} else {
-				$statement = str_replace(":$param", $value, $statement);
-			}
+                $statement = preg_replace('/\?/', $value, $statement, 1);
+            } else {
+                $statement = str_replace(":$param", $value, $statement);
+            }
         }
 
         $start = microtime(true);
