@@ -27,7 +27,7 @@ class PDOStatement
      * @param Pdo           $pdo       The PDO logging class instance.
      * @param \PDOStatement $statement The original prepared statement.
      */
-    public function __construct(\Filisko\PDOplus\PDO $pdo, \PDOStatement $PDOStatement)
+    public function __construct(PDO $pdo, \PDOStatement $PDOStatement)
     {
         $this->pdo = $pdo;
         $this->PDOStatement = $PDOStatement;
@@ -84,23 +84,31 @@ class PDOStatement
             $this->bindings = $input_parameters;
         }
 
-        $bindings = $this->bindings;
-        $statement = $this->PDOStatement->queryString;
-        $indexed = ($bindings == array_values($bindings));
-        foreach ($bindings as $param => $value) {
-            $value = (is_numeric($value) or is_null($value)) ? $value : $this->pdo->quote($value);
-            $value = is_null($value) ? "null" : $value;
-            if ($indexed) {
-                $statement = preg_replace('/\?/', $value, $statement, 1);
-            } else {
-                $statement = str_replace(":$param", $value, $statement);
-            }
-        }
+        $statement = $this->addValuesToQuery(
+            $this->bindings,
+            $this->PDOStatement->queryString
+        );
 
         $start = microtime(true);
         $result = $this->PDOStatement->execute($input_parameters);
         $this->pdo->addLog($statement, microtime(true) - $start);
 
         return $result;
+    }
+
+    public function addValuesToQuery($bindings, $query)
+    {
+        $indexed = ($bindings == array_values($bindings));
+        foreach ($bindings as $param => $value) {
+            $value = (is_numeric($value) or is_null($value)) ? $value : $this->pdo->quote($value);
+            $value = is_null($value) ? "null" : $value;
+            if ($indexed) {
+                $query = preg_replace('/\?/', $value, $query, 1);
+            } else {
+                $query = str_replace(":$param", $value, $query);
+            }
+        }
+
+        return $query;
     }
 }
