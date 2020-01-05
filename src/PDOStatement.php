@@ -60,7 +60,7 @@ class PDOStatement
     /**
      * @see \PDOStatement::bindParam
      */
-    public function bindParam($parameter , &$variable,  $data_type = \PDO::PARAM_STR)
+    public function bindParam($parameter, &$variable, $data_type = \PDO::PARAM_STR)
     {
         $this->bindings[$parameter] = $variable;
         return $this->PDOStatement->bindParam($parameter, $variable, $data_type);
@@ -69,7 +69,7 @@ class PDOStatement
     /**
      * @see \PDOStatement::bindValue
      */
-    public function bindValue($parameter , &$variable,  $data_type = \PDO::PARAM_STR)
+    public function bindValue($parameter, &$variable, $data_type = \PDO::PARAM_STR)
     {
         $this->bindings[$parameter] = $variable;
         return $this->PDOStatement->bindValue($parameter, $variable, $data_type);

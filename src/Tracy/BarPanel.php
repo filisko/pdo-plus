@@ -48,9 +48,9 @@ class BarPanel implements \Tracy\IBarPanel
     }
 
     /**
-	 * Get total queries execution time
-	 * @return string
-	 */
+     * Get total queries execution time
+     * @return string
+     */
     protected function getTotalTime()
     {
         $time = round(array_sum(array_column($this->queries, 'time')), 4);
@@ -58,9 +58,9 @@ class BarPanel implements \Tracy\IBarPanel
     }
 
     /**
-	 * Renders HTML code for custom tab.
-	 * @return string
-	 */
+     * Renders HTML code for custom tab.
+     * @return string
+     */
     public function getTab()
     {
         $html = '<img src="'.$this->icon.'" alt="PDO queries logger" /> ';
@@ -78,9 +78,9 @@ class BarPanel implements \Tracy\IBarPanel
     }
 
     /**
-	 * Renders HTML code for custom panel.
-	 * @return string
-	 */
+     * Renders HTML code for custom panel.
+     * @return string
+     */
     public function getPanel()
     {
         if (class_exists('\SqlFormatter')) {
