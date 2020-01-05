@@ -22,9 +22,9 @@ class PDOStatementTest extends TestCase
         $this->prophet->checkPredictions();
     }
 
-     /**
-     * @dataProvider dataForTestAddValuesToQuery
-     */
+    /**
+    * @dataProvider dataForTestAddValuesToQuery
+    */
     public function testAddValuesToQuery($bindings, $query, $expected)
     {
         $corePdoStatement = $this->prophet->prophesize(\PDOStatement::class);
