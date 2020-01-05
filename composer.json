@@ -25,6 +25,6 @@
     },
     "scripts": {
         "test": "php ./vendor/bin/phpunit",
-        "cs-fix": "php ./vendor/bin/php-cs-fixer fix --rules=@Symfony,-@PSR1,-blank_line_before_statement,strict_comparison . "
+        "cs-fix": "php ./vendor/bin/php-cs-fixer fix . "
     }
 }
