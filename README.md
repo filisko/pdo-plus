@@ -21,9 +21,9 @@ In this example we are using two different PDO instances just to show that it's 
 $pdoConnection1 = new \Filisko\PDOplus\PDO('mysql:host=127.0.0.1;dbname=my_db', 'my_user', 'my_pass');
 $pdoConnection2 = new \Filisko\PDOplus\PDO('mysql:host=127.0.0.1;dbname=my_other_db', 'my_user', 'my_pass');
 
-// ... our PDO queries ...
+// ... our SQL queries ...
 
-// Dump all logged queries of PDO connection 1
+// Dump logged queries of PDO connection 1
 var_dump($pdoConnection1->getLog());
 
 // --- the following code shows how to integrate with Tracy debugger
