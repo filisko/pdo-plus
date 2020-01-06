@@ -26,6 +26,8 @@ $pdoConnection2 = new \Filisko\PDOplus\PDO('mysql:host=127.0.0.1;dbname=my_other
 // Dump all logged queries of PDO connection 1
 var_dump($pdoConnection1->getLog());
 
+// --- the following code shows how to integrate with Tracy debugger
+
 // Instance for Tracy BarPanel for connection 1
 $db1Panel = new \Filisko\PDOplus\Tracy\BarPanel($pdoConnection1);
 $db1Panel->title = "DB 1 Panel";
