@@ -38,3 +38,12 @@ $db2Panel->title = "DB 2 Panel";
 \Tracy\Debugger::getBar()->addPanel($db1Panel);
 \Tracy\Debugger::getBar()->addPanel($db2Panel);
 ```
+
+## Tests
+Run tests:
+
+```shell
+composer test
+# or
+php ./vendor/bin/phpunit
+```
