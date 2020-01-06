@@ -1,6 +1,6 @@
 # PDO plus
 
-PDO plus extends PDO in order to log all your queries (very useful for legacy apps!). It also includes a Bar Panel for Tracy, see the result below.
+PDO plus extends PDO in order to log all your queries. This package also includes a Bar Panel for Tracy, see the result below.
 
 ## Result
 ![PDO logger with Tracy](https://i.snag.gy/AbESVC.jpg "PDO logger with Tracy")
