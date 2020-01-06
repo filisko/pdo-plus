@@ -8,8 +8,8 @@
         "psr-4": {"Filisko\\PDOplus\\": "src/"}
     },
     "suggest": {
-        "jdorn/sql-formatter": "Highlight the SQL logged queries",
-        "tracy/tracy": "Install Tracy if you want to use the provided Bar Panel to see the logged queries"
+        "jdorn/sql-formatter": "Highlights your SQL queries inside Tracy Bar Panel",
+        "tracy/tracy": "Tracy debugger. Remember this package includes a Bar Panel that shows logged SQL queries"
     },
     "authors": [
         {
