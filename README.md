@@ -34,7 +34,8 @@ $db1Panel->title = "DB 1 Panel";
 $db2Panel = new \Filisko\PDOplus\Tracy\BarPanel($pdoConnection2);
 $db2Panel->title = "DB 2 Panel";
 
-// Add panels to Tracy Bar
+// Enables Tracy debugger and adds panels for each connection (give it a try!, its a very easy to integrate with legacy apps)
+\Tracy\Debugger::enable();
 \Tracy\Debugger::getBar()->addPanel($db1Panel);
 \Tracy\Debugger::getBar()->addPanel($db2Panel);
 ```
