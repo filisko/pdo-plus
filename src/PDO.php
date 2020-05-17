@@ -15,15 +15,6 @@ class PDO extends \PDO
         $this->setAttribute(self::ATTR_STATEMENT_CLASS, [PDOStatement::class, [$this]]);
     }
 
-    /**
-     * @see \PDO::prepare
-     */
-    public function prepare($statement, $driver_options = [])
-    {
-        $PDOStatement = parent::prepare($statement, $driver_options);
-        $new = new \Filisko\PDOplus\PDOStatement($this, $PDOStatement);
-        return $new;
-    }
 
     /**
      * @see \PDO::exec
@@ -42,7 +33,7 @@ class PDO extends \PDO
     public function query($statement, $mode = PDO::ATTR_DEFAULT_FETCH_MODE, $arg3 = null, array $ctorargs = [])
     {
         $start = microtime(true);
-        $result = parent::query($statement);
+        $result = parent::query($statement, $mode, $arg3, $ctorargs);
         $this->addLog($statement, microtime(true) - $start);
         return $result;
     }

@@ -21,7 +21,9 @@
         "phpunit/phpunit": "^8.5",
         "phpspec/prophecy": "^1.10",
         "symfony/var-dumper": "^5.0",
-        "friendsofphp/php-cs-fixer": "^2.16"
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "ext-sqlite": "*",
+        "ext-pdo": "*"
     },
     "scripts": {
         "test": "php ./vendor/bin/phpunit",

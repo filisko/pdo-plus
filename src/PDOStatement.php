@@ -1,7 +1,7 @@
 <?php
 namespace Filisko\PDOplus;
 
-class PDOStatement
+class PDOStatement extends \PDOStatement
 {
     /**
      * PDO instance.
@@ -59,12 +59,17 @@ class PDOStatement
         return $result;
     }
 
-    public function addValuesToQuery(array $bindings, string $query): string
+    /**
+     * @param array         $bindings
+     * @param string        $query
+     * @return string
+     */
+    public function addValuesToQuery($bindings, $query)
     {
         $indexed = ($bindings == array_values($bindings));
         foreach($bindings as $param => $value) {
             $value = (is_numeric($value) or $value === null) ? $value : $this->pdo->quote($value);
-            $value = $value ?? 'null';
+            $value = is_null($value) ? "null" : $value;
             if($indexed) {
                 $query = preg_replace('/\?/', $value, $query, 1);
             } else {
