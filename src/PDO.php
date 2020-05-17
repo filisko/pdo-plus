@@ -9,20 +9,10 @@ class PDO extends \PDO
      */
     protected $log = [];
 
-    /**
-     * Relay all calls.
-     *
-     * @param string $name      The method name to call.
-     * @param array  $arguments The arguments for the call.
-     *
-     * @return mixed The call results.
-     */
-    public function __call($name, array $arguments)
+    public function __construct($dsn, $username = null, $passwd = null, $options = null)
     {
-        return call_user_func_array(
-            array($this, $name),
-            $arguments
-        );
+        parent::__construct($dsn, $username, $passwd, $options);
+        $this->setAttribute(self::ATTR_STATEMENT_CLASS, [PDOStatement::class, [$this]]);
     }
 
     /**
@@ -49,7 +39,7 @@ class PDO extends \PDO
     /**
      * @see \PDO::query
      */
-    public function query($statement)
+    public function query($statement, $mode = PDO::ATTR_DEFAULT_FETCH_MODE, $arg3 = null, array $ctorargs = [])
     {
         $start = microtime(true);
         $result = parent::query($statement);
@@ -68,12 +58,12 @@ class PDO extends \PDO
             'statement' => $statement,
             'time' => $time * 1000
         ];
-        array_push($this->log, $query);
+        $this->log[] = $query;
     }
 
     /**
      * Return logged queries.
-     * @return array Logged queries
+     * @return array<array{statement:string, time:float}> Logged queries
      */
     public function getLog()
     {

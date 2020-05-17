@@ -37,14 +37,14 @@ class BarPanel implements \Tracy\IBarPanel
     public $query_attributes = '';
 
     /**
-     * PDO logged queries
-     * @var array
+     * PDO
+     * @var \Filisko\PDOplus\PDO
      */
-    protected $queries;
+    private $pdo;
 
     public function __construct(\Filisko\PDOplus\PDO $pdo)
     {
-        $this->queries = $pdo->getLog();
+        $this->pdo = $pdo;
     }
 
     /**
@@ -53,8 +53,7 @@ class BarPanel implements \Tracy\IBarPanel
      */
     protected function getTotalTime()
     {
-        $time = round(array_sum(array_column($this->queries, 'time')), 4);
-        return $time;
+        return (string) round(array_sum(array_column($this->pdo->getLog(), 'time')), 4);
     }
 
     /**
@@ -64,7 +63,7 @@ class BarPanel implements \Tracy\IBarPanel
     public function getTab()
     {
         $html = '<img src="'.$this->icon.'" alt="PDO queries logger" /> ';
-        $queries = count($this->queries);
+        $queries = count($this->pdo->getLog());
         if ($queries == 0) {
             $html .= 'no queries!';
             return $html;
@@ -73,7 +72,7 @@ class BarPanel implements \Tracy\IBarPanel
         } else {
             $html .= $queries . ' queries';
         }
-        $html .= ' / '.$this->getTotalTime().'ms';
+        $html .= ' / '.$this->getTotalTime().' ms';
         return $html;
     }
 
@@ -86,7 +85,7 @@ class BarPanel implements \Tracy\IBarPanel
         if (class_exists('\SqlFormatter')) {
             \SqlFormatter::$pre_attributes = 'style="color: black;"';
         }
-        $queries = $this->queries;
+        $queries = $this->pdo->getLog();
         $html = '<h1 '.$this->title_attributes.'>'.$this->title.'</h1>';
         $html .= '<div class="tracy-inner tracy-InfoPanel">';
         if (count($queries) > 0) {
