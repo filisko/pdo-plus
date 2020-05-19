@@ -69,7 +69,7 @@ class PDOStatement extends \PDOStatement
         $indexed = ($bindings == array_values($bindings));
         foreach($bindings as $param => $value) {
             $value = (is_numeric($value) or $value === null) ? $value : $this->pdo->quote($value);
-            $value = is_null($value) ? "null" : $value;
+            $value = is_null($value) ? 'null' : $value;
             if($indexed) {
                 $query = preg_replace('/\?/', $value, $query, 1);
             } else {
