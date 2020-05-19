@@ -9,15 +9,17 @@ class PDO extends \PDO
      */
     protected $log = [];
 
+    /**
+     * @inheritDoc
+     */
     public function __construct($dsn, $username = null, $passwd = null, $options = null)
     {
         parent::__construct($dsn, $username, $passwd, $options);
         $this->setAttribute(self::ATTR_STATEMENT_CLASS, [PDOStatement::class, [$this]]);
     }
 
-
     /**
-     * @see \PDO::exec
+     * @inheritDoc
      */
     public function exec($statement)
     {
@@ -28,7 +30,7 @@ class PDO extends \PDO
     }
 
     /**
-     * @see \PDO::query
+     * @inheritDoc
      */
     public function query($statement, $mode = PDO::ATTR_DEFAULT_FETCH_MODE, $arg3 = null, array $ctorargs = [])
     {

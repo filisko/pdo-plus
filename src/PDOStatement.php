@@ -16,15 +16,15 @@ class PDOStatement extends \PDOStatement
     protected $bindings = [];
 
     /**
-     * @param \PDO           $pdo       The PDO logging class instance.
+     * @param \PDO $pdo The PDO logging class instance.
      */
     protected function __construct(\PDO $pdo)
     {
-        $this->pdo          = $pdo;
+        $this->pdo = $pdo;
     }
 
     /**
-     * @see \PDOStatement::bindParam
+     * @inheritDoc
      */
     public function bindParam(
         $parameter, &$variable, $data_type = \PDO::PARAM_STR, $length = null, $driver_options = null
@@ -34,7 +34,7 @@ class PDOStatement extends \PDOStatement
     }
 
     /**
-     * @see \PDOStatement::bindValue
+     * @inheritDoc
      */
     public function bindValue($parameter, $variable, $data_type = \PDO::PARAM_STR)
     {
@@ -43,7 +43,7 @@ class PDOStatement extends \PDOStatement
     }
 
     /**
-     * @see \PDOStatement::execute
+     * @inheritDoc
      */
     public function execute($input_parameters = null)
     {
@@ -60,13 +60,14 @@ class PDOStatement extends \PDOStatement
     }
 
     /**
-     * @param array         $bindings
-     * @param string        $query
+     * @param array $bindings
+     * @param string $query
      * @return string
      */
     public function addValuesToQuery($bindings, $query)
     {
         $indexed = ($bindings == array_values($bindings));
+
         foreach($bindings as $param => $value) {
             $value = (is_numeric($value) or $value === null) ? $value : $this->pdo->quote($value);
             $value = is_null($value) ? 'null' : $value;
