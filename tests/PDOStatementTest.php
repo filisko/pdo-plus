@@ -1,7 +1,6 @@
 <?php
 
 use Filisko\PDOplus\PDO as CustomPDO;
-use Filisko\PDOplus\PDOStatement as CustomPDOStatement;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophet;
 
@@ -27,12 +26,9 @@ class PDOStatementTest extends TestCase
     */
     public function testAddValuesToQuery($bindings, $query, $expected)
     {
-        $corePdoStatement = $this->prophet->prophesize(\PDOStatement::class);
+        $this->customPdo->exec('CREATE TABLE users(id INTEGER,name TEXT, surname TEXT);');
+        $pdoStatement = $this->customPdo->prepare($query);
 
-        $pdoStatement = new CustomPDOStatement(
-            $this->customPdo,
-            $corePdoStatement->reveal()
-        );
 
         $result = $pdoStatement->addValuesToQuery($bindings, $query);
         $this->assertEquals($expected, $result);

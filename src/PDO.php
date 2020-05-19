@@ -10,33 +10,16 @@ class PDO extends \PDO
     protected $log = [];
 
     /**
-     * Relay all calls.
-     *
-     * @param string $name      The method name to call.
-     * @param array  $arguments The arguments for the call.
-     *
-     * @return mixed The call results.
+     * @inheritDoc
      */
-    public function __call($name, array $arguments)
+    public function __construct($dsn, $username = null, $passwd = null, $options = null)
     {
-        return call_user_func_array(
-            array($this, $name),
-            $arguments
-        );
+        parent::__construct($dsn, $username, $passwd, $options);
+        $this->setAttribute(self::ATTR_STATEMENT_CLASS, [PDOStatement::class, [$this]]);
     }
 
     /**
-     * @see \PDO::prepare
-     */
-    public function prepare($statement, $driver_options = [])
-    {
-        $PDOStatement = parent::prepare($statement, $driver_options);
-        $new = new \Filisko\PDOplus\PDOStatement($this, $PDOStatement);
-        return $new;
-    }
-
-    /**
-     * @see \PDO::exec
+     * @inheritDoc
      */
     public function exec($statement)
     {
@@ -47,12 +30,12 @@ class PDO extends \PDO
     }
 
     /**
-     * @see \PDO::query
+     * @inheritDoc
      */
-    public function query($statement)
+    public function query($statement, $mode = PDO::ATTR_DEFAULT_FETCH_MODE, $arg3 = null, array $ctorargs = [])
     {
         $start = microtime(true);
-        $result = parent::query($statement);
+        $result = parent::query($statement, $mode, $arg3, $ctorargs);
         $this->addLog($statement, microtime(true) - $start);
         return $result;
     }
@@ -68,12 +51,12 @@ class PDO extends \PDO
             'statement' => $statement,
             'time' => $time * 1000
         ];
-        array_push($this->log, $query);
+        $this->log[] = $query;
     }
 
     /**
      * Return logged queries.
-     * @return array Logged queries
+     * @return array<array{statement:string, time:float}> Logged queries
      */
     public function getLog()
     {
