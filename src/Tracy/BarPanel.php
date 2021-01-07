@@ -53,7 +53,7 @@ class BarPanel implements \Tracy\IBarPanel
      */
     protected function getTotalTime()
     {
-        return (string) round(array_sum(array_column($this->pdo->getLog(), 'time')), 4);
+        return (string) round(array_sum(array_column($this->pdo->getLog(), 'time')), 2);
     }
 
     /**
@@ -89,14 +89,14 @@ class BarPanel implements \Tracy\IBarPanel
         $html = '<h1 '.$this->title_attributes.'>'.$this->title.'</h1>';
         $html .= '<div class="tracy-inner tracy-InfoPanel">';
         if (count($queries) > 0) {
-            $html .= '<table style="width:400px;">';
+            $html .= '<table class="tracy-sortable">';
             $html .= '<tr>';
             $html .= '<th>Time(ms)</td>';
             $html .= '<th>Statement</td>';
             $html .= '</tr>';
             foreach ($queries as $query) {
                 $html .= '<tr>';
-                $html .= '<td><span '.$this->time_attributes.'>'.round($query['time'], 4).'</span></td>';
+                $html .= '<td><span '.$this->time_attributes.'>'.round($query['time'], 2).'</span></td>';
                 if (class_exists('\SqlFormatter')) {
                     $html .= '<td>'.\SqlFormatter::highlight($query['statement']).'</td>';
                 } else {
