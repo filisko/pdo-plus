@@ -1,7 +1,7 @@
 {
     "name": "filisko/pdo-plus",
-    "description": "PDO plus extends PDO to allow you to see all your executed queries. It also includes a Bar Panel for Tracy",
-    "keywords": ["pdo", "logging", "queries", "tracy"],
+    "description": "PDO+ extends PDO in order to log all executed queries. It also includes a Bar Panel for Tracy",
+    "keywords": ["pdo", "log", "sql", "queries", "debug", "tracy"],
     "type": "package",
     "license": "MIT",
     "autoload": {
@@ -17,6 +17,9 @@
             "email": "filisfutsarov@gmail.com"
         }
     ],
+    "require": {
+        "ext-pdo": "*"
+    },
     "require-dev": {
         "phpunit/phpunit": "^8.5",
         "phpspec/prophecy": "^1.10",

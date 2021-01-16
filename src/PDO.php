@@ -1,7 +1,9 @@
 <?php
 namespace Filisko\PDOplus;
 
-class PDO extends \PDO
+use PDO as NativePdo;
+
+class PDO extends NativePdo
 {
     /**
      * Logged queries.

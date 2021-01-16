@@ -1,7 +1,9 @@
 <?php
 namespace Filisko\PDOplus\Tracy;
 
-class BarPanel implements \Tracy\IBarPanel
+use Tracy\IBarPanel;
+
+class BarPanel implements IBarPanel
 {
     /**
      * Base64 icon for Tracy panel.

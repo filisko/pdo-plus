@@ -1,11 +1,14 @@
 <?php
 namespace Filisko\PDOplus;
 
-class PDOStatement extends \PDOStatement
+use PDO as NativePdo;
+use PDOStatement as NativePdoStatement;
+
+class PDOStatement extends NativePdoStatement
 {
     /**
      * PDO instance.
-     * @var \PDO
+     * @var NativePdo
      */
     protected $pdo;
 
@@ -16,9 +19,9 @@ class PDOStatement extends \PDOStatement
     protected $bindings = [];
 
     /**
-     * @param \PDO $pdo The PDO logging class instance.
+     * @param NativePdo $pdo The PDO logging class instance.
      */
-    protected function __construct(\PDO $pdo)
+    protected function __construct(NativePdo $pdo)
     {
         $this->pdo = $pdo;
     }
@@ -27,7 +30,11 @@ class PDOStatement extends \PDOStatement
      * @inheritDoc
      */
     public function bindParam(
-        $parameter, &$variable, $data_type = \PDO::PARAM_STR, $length = null, $driver_options = null
+        $parameter,
+        &$variable,
+        $data_type = NativePdo::PARAM_STR,
+        $length = null,
+        $driver_options = null
     ) {
         $this->bindings[$parameter] = $variable;
         return parent::bindParam($parameter, $variable, $data_type, $length, $driver_options);
@@ -36,7 +43,7 @@ class PDOStatement extends \PDOStatement
     /**
      * @inheritDoc
      */
-    public function bindValue($parameter, $variable, $data_type = \PDO::PARAM_STR)
+    public function bindValue($parameter, $variable, $data_type = NativePdo::PARAM_STR)
     {
         $this->bindings[$parameter] = $variable;
         return parent::bindValue($parameter, $variable, $data_type);
@@ -47,7 +54,7 @@ class PDOStatement extends \PDOStatement
      */
     public function execute($input_parameters = null)
     {
-        if(is_array($input_parameters)) {
+        if (is_array($input_parameters)) {
             $this->bindings = $input_parameters;
         }
 
@@ -68,7 +75,7 @@ class PDOStatement extends \PDOStatement
     {
         $indexed = ($bindings == array_values($bindings));
 
-        foreach($bindings as $param => $value) {
+        foreach ($bindings as $param => $value) {
             $value = (is_numeric($value) or $value === null) ? $value : $this->pdo->quote($value);
             $value = is_null($value) ? 'null' : $value;
             if($indexed) {
