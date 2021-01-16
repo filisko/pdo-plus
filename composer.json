@@ -1,6 +1,6 @@
 {
     "name": "filisko/pdo-plus",
-    "description": "PDO+ extends PDO in order to log all executed queries. It also includes a Bar Panel for Tracy",
+    "description": "PDO+ extends PDO in order to log all your queries. It also includes a Bar Panel for Tracy",
     "keywords": ["pdo", "log", "sql", "queries", "debug", "tracy"],
     "type": "package",
     "license": "MIT",
