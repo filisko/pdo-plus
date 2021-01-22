@@ -55,7 +55,7 @@ class BarPanel implements IBarPanel
      */
     protected function getTotalTime()
     {
-        return (string) round(array_sum(array_column($this->pdo->getLog(), 'time')), 2);
+        return (string) round(array_sum(array_column($this->pdo->getLog(), 'time')), 4);
     }
 
     /**
@@ -98,7 +98,7 @@ class BarPanel implements IBarPanel
             $html .= '</tr>';
             foreach ($queries as $query) {
                 $html .= '<tr>';
-                $html .= '<td><span '.$this->time_attributes.'>'.round($query['time'], 2).'</span></td>';
+                $html .= '<td><span '.$this->time_attributes.'>'.round($query['time'], 4).'</span></td>';
                 if (class_exists('\SqlFormatter')) {
                     $html .= '<td>'.\SqlFormatter::highlight($query['statement']).'</td>';
                 } else {
