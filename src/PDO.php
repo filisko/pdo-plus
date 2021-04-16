@@ -34,10 +34,10 @@ class PDO extends NativePdo
     /**
      * @inheritDoc
      */
-    public function query($statement, $mode = PDO::ATTR_DEFAULT_FETCH_MODE, $arg3 = null, array $ctorargs = [])
+    public function query ($statement, $mode = PDO::ATTR_DEFAULT_FETCH_MODE, ...$fetch_mode_args)
     {
         $start = microtime(true);
-        $result = parent::query($statement, $mode, $arg3, $ctorargs);
+        $result = parent::query($statement, $mode, ...$fetch_mode_args);
         $this->addLog($statement, microtime(true) - $start);
         return $result;
     }
