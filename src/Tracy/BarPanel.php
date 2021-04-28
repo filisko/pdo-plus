@@ -1,8 +1,13 @@
 <?php
+
 namespace Filisko\PDOplus\Tracy;
 
+use Filisko\PDOplus\PDO;
 use Tracy\IBarPanel;
 
+/**
+ * @codeCoverageIgnore
+ */
 class BarPanel implements IBarPanel
 {
     /**
@@ -39,12 +44,11 @@ class BarPanel implements IBarPanel
     public $query_attributes = '';
 
     /**
-     * PDO
-     * @var \Filisko\PDOplus\PDO
+     * @var PDO
      */
     private $pdo;
 
-    public function __construct(\Filisko\PDOplus\PDO $pdo)
+    public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
     }

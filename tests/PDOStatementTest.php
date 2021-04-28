@@ -1,62 +1,110 @@
 <?php
 
-use Filisko\PDOplus\PDO as CustomPDO;
+declare(strict_types=1);
+
+use Filisko\PDOplus\PDO as PDOplus;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Prophet;
 
 class PDOStatementTest extends TestCase
 {
-    private $customPdo;
-
-    private $prophet;
+    private $sut;
 
     public function setUp(): void
     {
-        $this->customPdo = new CustomPDO('sqlite::memory:');
-        $this->prophet = new Prophet;
+        $this->sut = new PDOplus('sqlite::memory:');
+        $this->sut->exec('CREATE TABLE users(id INTEGER,name TEXT, surname TEXT);');
     }
 
-    protected function tearDown(): void
+    public function tearDown(): void
     {
-        $this->prophet->checkPredictions();
-    }
-
-    /**
-    * @dataProvider dataForTestAddValuesToQuery
-    */
-    public function testAddValuesToQuery($bindings, $query, $expected)
-    {
-        $this->customPdo->exec('CREATE TABLE users(id INTEGER,name TEXT, surname TEXT);');
-        $pdoStatement = $this->customPdo->prepare($query);
-
-
-        $result = $pdoStatement->addValuesToQuery($bindings, $query);
-        $this->assertEquals($expected, $result);
+        if ($this->sut->exec('DROP TABLE users;') !== 0) {
+            throw new RuntimeException('Table not dropped?');
+        }
     }
 
     public function dataForTestAddValuesToQuery()
     {
         return [
-          [
-              [
-                1, 'Filis'
-              ],
-              'SELECT * FROM users WHERE `id` = ? AND `name` = ?',
-              "SELECT * FROM users WHERE `id` = 1 AND `name` = 'Filis'"
-          ],
-          [
-              [
-                'id' => 10,
-                'surname' => 'Futsarov'
-              ],
-              'SELECT * FROM users WHERE `id` = :id AND `surname` = :surname',
-              "SELECT * FROM users WHERE `id` = 10 AND `surname` = 'Futsarov'"
-          ],
-          [
-              [],
-              'SELECT * FROM users',
-              "SELECT * FROM users"
-          ]
+            [
+                [null],
+                'SELECT * FROM users WHERE `name` = ?',
+                "SELECT * FROM users WHERE `name` = null"
+            ],
+            [
+                [1],
+                'SELECT * FROM users WHERE `id` = ?',
+                "SELECT * FROM users WHERE `id` = 1"
+            ],
+            [
+                [1.5],
+                'SELECT * FROM users WHERE `id` = ?',
+                "SELECT * FROM users WHERE `id` = 1.5"
+            ],
+            [
+                ['Filis'],
+                'SELECT * FROM users WHERE `name` = ?',
+                "SELECT * FROM users WHERE `name` = 'Filis'"
+            ],
+            [
+                [
+                    1, 'Filis'
+                ],
+                'SELECT * FROM users WHERE `id` = ? AND `name` = ?',
+                "SELECT * FROM users WHERE `id` = 1 AND `name` = 'Filis'"
+            ],
+            [
+                [
+                    'id' => 10,
+                    'surname' => 'Futsarov'
+                ],
+                'SELECT * FROM users WHERE `id` = :id AND `surname` = :surname',
+                "SELECT * FROM users WHERE `id` = 10 AND `surname` = 'Futsarov'"
+            ],
+            [
+                [],
+                'SELECT * FROM users',
+                "SELECT * FROM users"
+            ]
         ];
+    }
+
+    /**
+     * @dataProvider dataForTestAddValuesToQuery
+     */
+    public function testExecute(array $bindings, $query, $expected)
+    {
+        $pdoStatement = $this->sut->prepare($query);
+
+        $pdoStatement->execute($bindings);
+
+        static::assertEquals(
+            $expected,
+            $this->sut->getLog()[1]['statement']
+        );
+    }
+
+    public function testBindValue()
+    {
+        $pdoStatement = $this->sut->prepare('SELECT * FROM users WHERE `id` = :id');
+        $pdoStatement->bindValue('id', 1, PDO::PARAM_INT);
+        $pdoStatement->execute();
+
+        static::assertEquals(
+            "SELECT * FROM users WHERE `id` = 1",
+            $this->sut->getLog()[1]['statement']
+        );
+    }
+
+    public function testBindParam()
+    {
+        $pdoStatement = $this->sut->prepare('SELECT * FROM users WHERE `id` = :id');
+        $value = null;
+        $pdoStatement->bindParam('id', $value, PDO::PARAM_NULL, 1);
+        $pdoStatement->execute();
+
+        static::assertEquals(
+            "SELECT * FROM users WHERE `id` = null",
+            $this->sut->getLog()[1]['statement']
+        );
     }
 }

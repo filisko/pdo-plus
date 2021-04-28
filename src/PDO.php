@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Filisko\PDOplus;
 
 use PDO as NativePdo;
@@ -7,7 +10,7 @@ class PDO extends NativePdo
 {
     /**
      * Logged queries.
-     * @var array
+     * @var array<array>
      */
     protected $log = [];
 
@@ -28,39 +31,42 @@ class PDO extends NativePdo
         $start = microtime(true);
         $result = parent::exec($statement);
         $this->addLog($statement, microtime(true) - $start);
+
         return $result;
     }
 
     /**
      * @inheritDoc
      */
-    public function query($statement, $mode = PDO::ATTR_DEFAULT_FETCH_MODE, $arg3 = null, array $ctorargs = [])
+    public function query($statement, $mode = PDO::ATTR_DEFAULT_FETCH_MODE, ...$fetch_mode_args)
     {
         $start = microtime(true);
-        $result = parent::query($statement, $mode, $arg3, $ctorargs);
+        $result = parent::query($statement, $mode, ...$fetch_mode_args);
+
         $this->addLog($statement, microtime(true) - $start);
+
         return $result;
     }
 
     /**
      * Add query to logged queries.
+     *
      * @param string $statement
      * @param float $time Elapsed seconds with microseconds
      */
-    public function addLog($statement, $time)
+    public function addLog(string $statement, float $time): void
     {
-        $query = [
+        $this->log[] = [
             'statement' => $statement,
             'time' => $time * 1000
         ];
-        $this->log[] = $query;
     }
 
     /**
      * Return logged queries.
      * @return array<array{statement:string, time:float}> Logged queries
      */
-    public function getLog()
+    public function getLog(): array
     {
         return $this->log;
     }

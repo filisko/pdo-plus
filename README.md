@@ -1,12 +1,16 @@
 # PDO plus
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5216e5b457684f5bb43d727bceb3cc58)](https://www.codacy.com/gh/filisko/pdo-plus/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=filisko/pdo-plus&amp;utm_campaign=Badge_Grade) [![Coverage Status](https://coveralls.io/repos/github/filisko/pdo-plus/badge.svg?branch=github-actions)](https://coveralls.io/github/filisko/pdo-plus?branch=github-actions)
+
 PDO plus extends PDO in order to log all your queries. This package also includes a Bar Panel for Tracy, see the result below.
 
 ## Result
+
 ![PDO logger with Tracy](https://i.snag.gy/AbESVC.jpg "PDO logger with Tracy")
 
 ## Installation
-Install it via composer:
+
+Install via composer:
 
 ```shell
 composer require filisko/pdo-plus
@@ -43,10 +47,9 @@ $db2Panel->title = "DB 2 Panel";
 ```
 
 ## Tests
+
 Run tests:
 
 ```shell
-composer test
-# or
-php ./vendor/bin/phpunit
+composer run-script test
 ```

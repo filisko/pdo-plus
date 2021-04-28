@@ -1,7 +1,7 @@
 {
     "name": "filisko/pdo-plus",
     "description": "PDO+ extends PDO in order to log all your queries. It also includes a Bar Panel for Tracy",
-    "keywords": ["pdo", "log", "sql", "queries", "debug", "tracy"],
+    "keywords": ["pdo", "log", "sql", "queries", "debug", "tracy", "php8"],
     "type": "package",
     "license": "MIT",
     "autoload": {
@@ -18,18 +18,20 @@
         }
     ],
     "require": {
+        "php": ">=8.0",
         "ext-pdo": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.5",
-        "phpspec/prophecy": "^1.10",
-        "symfony/var-dumper": "^5.0",
+        "ext-sqlite3": "*",
+        "phpunit/phpunit": "^9.5",
         "friendsofphp/php-cs-fixer": "^2.16",
-        "ext-sqlite": "*",
-        "ext-pdo": "*"
+        "phpstan/phpstan": "^0.12.89",
+        "tracy/tracy": "^2.8",
+        "infection/infection": "^0.23.0",
+        "php-coveralls/php-coveralls": "^2.4"
     },
     "scripts": {
-        "test": "php ./vendor/bin/phpunit",
+        "test": "XDEBUG_MODE=coverage php ./vendor/bin/phpunit",
         "cs-fix": "php ./vendor/bin/php-cs-fixer fix . "
     }
 }
