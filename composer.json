@@ -23,7 +23,7 @@
     },
     "require-dev": {
         "ext-sqlite3": "*",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^7.5",
         "friendsofphp/php-cs-fixer": "^2.16"
     },
     "scripts": {
