@@ -4,6 +4,11 @@
 
 PDO plus extends PDO in order to log all your queries. This package also includes a Bar Panel for Tracy, see the result below.
 
+| Release | Supported PHP versions |
+| --- | --- |
+| 4.x.x (here now) | 8.0 |
+| [3.x.x](https://github.com/filisko/pdo-plus/tree/3.x.x) | 7.2, 7.3, 7.4 |
+
 ## Result
 
 ![PDO logger with Tracy](https://i.snag.gy/AbESVC.jpg "PDO logger with Tracy")
