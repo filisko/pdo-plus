@@ -1,5 +1,8 @@
 # PDO plus
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4b7cfda9d0494734a326d5f307013d4b)](https://app.codacy.com/gh/filisko/pdo-plus?utm_source=github.com&utm_medium=referral&utm_content=filisko/pdo-plus&utm_campaign=Badge_Grade_Settings)
+
+
 PDO plus extends PDO in order to log all your queries. This package also includes a Bar Panel for Tracy, see the result below.
 
 ## Result
