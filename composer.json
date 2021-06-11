@@ -18,15 +18,13 @@
         }
     ],
     "require": {
+        "php": "^7.2 || ^7.3 || ^7.4",
         "ext-pdo": "*"
     },
     "require-dev": {
+        "ext-sqlite3": "*",
         "phpunit/phpunit": "^8.5",
-        "phpspec/prophecy": "^1.10",
-        "symfony/var-dumper": "^5.0",
-        "friendsofphp/php-cs-fixer": "^2.16",
-        "ext-sqlite": "*",
-        "ext-pdo": "*"
+        "friendsofphp/php-cs-fixer": "^2.16"
     },
     "scripts": {
         "test": "php ./vendor/bin/phpunit",
