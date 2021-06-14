@@ -10,7 +10,7 @@ on:
       - synchronize
       - reopened
     branches:
-      - 'master'
+      - '3.x.x'
 
 jobs:
   test_unit:
