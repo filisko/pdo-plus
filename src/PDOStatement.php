@@ -59,28 +59,43 @@ class PDOStatement extends NativePdoStatement
         $result = parent::execute($params);
 
         $this->pdo->addLog(
-            $this->getStatementWithBindingsIn($this->bindings, $this->queryString),
+            $this->produceStatementWithBindingsInForLogging($this->bindings, $this->queryString),
             microtime(true) - $start
         );
 
         return $result;
     }
 
-    private function getStatementWithBindingsIn(array $bindings, string $query)
+    private function produceStatementWithBindingsInForLogging(array $bindings, string $query)
     {
         $indexed = ($bindings == array_values($bindings));
 
         foreach ($bindings as $param => $value) {
-            $value = is_numeric($value) || $value === null ? $value : $this->pdo->quote($value);
-            $value = is_null($value) ? 'null' : $value;
+            $valueForPresentation = $this->translateValueForPresentationInsideStatement($value);
 
             if ($indexed) {
-                $query = preg_replace('/\?/', (string)$value, $query, 1);
+                $query = preg_replace('/\?/', (string)$valueForPresentation, $query, 1);
             } else {
-                $query = str_replace(":$param", (string)$value, $query);
+                $query = str_replace(":$param", (string)$valueForPresentation, $query);
             }
         }
 
         return $query;
+    }
+
+    private function translateValueForPresentationInsideStatement(mixed $value): mixed
+    {
+        $result = $value;
+
+        if ($value === null) {
+            $result = 'null';
+        } elseif (is_string($value)) {
+            $result = $this->pdo->quote($value);
+        } elseif (is_bool($value) && $value === false) {
+            $result = '0';
+        } elseif (is_bool($value) && $value === true) {
+            $result = '1';
+        }
+        return $result;
     }
 }

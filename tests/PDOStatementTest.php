@@ -31,6 +31,11 @@ class PDOStatementTest extends TestCase
                 "SELECT * FROM users WHERE `name` = null"
             ],
             [
+                [false, true],
+                'SELECT * FROM users WHERE `name` = ? OR `name` = ?',
+                "SELECT * FROM users WHERE `name` = 0 OR `name` = 1"
+            ],
+            [
                 [1],
                 'SELECT * FROM users WHERE `id` = ?',
                 "SELECT * FROM users WHERE `id` = 1"
