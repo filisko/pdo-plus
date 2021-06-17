@@ -66,24 +66,26 @@ class PDOStatement extends NativePdoStatement
         return $result;
     }
 
-    private function produceStatementWithBindingsInForLogging(array $bindings, string $query)
+    private function produceStatementWithBindingsInForLogging(array $bindings, string $query): string
     {
         $indexed = ($bindings == array_values($bindings));
+
+        $result = $query;
 
         foreach ($bindings as $param => $value) {
             $valueForPresentation = $this->translateValueForPresentationInsideStatement($value);
 
             if ($indexed) {
-                $query = preg_replace('/\?/', (string)$valueForPresentation, $query, 1);
+                $result = preg_replace('/\?/', $valueForPresentation, $result, 1);
             } else {
-                $query = str_replace(":$param", (string)$valueForPresentation, $query);
+                $result = str_replace(":$param", $valueForPresentation, $result);
             }
         }
 
-        return $query;
+        return $result;
     }
 
-    private function translateValueForPresentationInsideStatement(mixed $value): mixed
+    private function translateValueForPresentationInsideStatement(mixed $value): string
     {
         $result = $value;
 
@@ -96,6 +98,7 @@ class PDOStatement extends NativePdoStatement
         } elseif (is_bool($value) && $value === true) {
             $result = '1';
         }
-        return $result;
+
+        return (string)$result;
     }
 }
