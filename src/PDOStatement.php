@@ -71,7 +71,7 @@ class PDOStatement extends NativePdoStatement
         $indexed = ($bindings == array_values($bindings));
 
         foreach ($bindings as $param => $value) {
-            $value = is_numeric($value) || $value === null ? $value : $this->pdo->quote($value);
+            $value = is_numeric($value) || is_bool($value) || $value === null ? $value : $this->pdo->quote($value);
             $value = is_null($value) ? 'null' : $value;
 
             if ($indexed) {
