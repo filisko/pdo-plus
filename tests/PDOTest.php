@@ -47,7 +47,7 @@ class PDOTest extends TestCase
     public function testFetchAll()
     {
         $stmt =$this->sut->query("SELECT * FROM users WHERE `name` = 'Filis'");
-        $data = $stmt->fetchAll(PDO::FETCH_CLASS, "User");
+        $stmt->fetchAll(PDO::FETCH_CLASS, "User");
         $stmt->closeCursor();
 
         static::assertInstanceOf(PdoPlusStatement::class, $stmt);
