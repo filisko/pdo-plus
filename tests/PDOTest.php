@@ -49,6 +49,11 @@ class PDOTest extends TestCase
         $stmt =$this->sut->query("SELECT * FROM users WHERE `name` = 'Filis'");
         $data = $stmt->fetchAll(PDO::FETCH_CLASS, "User");
         $stmt->closeCursor();
+
+
+        var_dump($data);
+        var_dump($stmt);
+
     }
 }
 
