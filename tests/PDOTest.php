@@ -43,4 +43,22 @@ class PDOTest extends TestCase
             $this->sut->getLog()[1]['statement']
         );
     }
+
+    public function testFetchAll()
+    {
+        $stmt = $this->sut->query("SELECT * FROM users WHERE `name` = 'Filis'");
+        $stmt->fetchAll(PDO::FETCH_CLASS, "User");
+
+        static::assertInstanceOf(PdoPlusStatement::class, $stmt);
+        static::assertEquals(
+            "SELECT * FROM users WHERE `name` = 'Filis'",
+            $this->sut->getLog()[1]['statement']
+        );
+
+    }
+}
+class User
+{
+    public $name;
+    public $surname;
 }
