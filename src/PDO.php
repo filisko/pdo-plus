@@ -54,7 +54,7 @@ class PDO extends NativePdo
      * @param string $statement
      * @param float $time Elapsed seconds with microseconds
      */
-    public function addLog(string $statement, float $time): void
+    private function addLog(string $statement, float $time): void
     {
         $this->log[] = [
             'statement' => $statement,
