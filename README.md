@@ -1,6 +1,8 @@
 # PDO plus
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5216e5b457684f5bb43d727bceb3cc58)](https://www.codacy.com/gh/filisko/pdo-plus/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=filisko/pdo-plus&amp;utm_campaign=Badge_Grade) [![Coverage Status](https://coveralls.io/repos/github/filisko/pdo-plus/badge.svg?branch=github-actions)](https://coveralls.io/github/filisko/pdo-plus?branch=github-actions)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5216e5b457684f5bb43d727bceb3cc58)](https://www.codacy.com/gh/filisko/pdo-plus/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=filisko/pdo-plus&amp;utm_campaign=Badge_Grade)
+[![Coverage Status](https://coveralls.io/repos/github/filisko/pdo-plus/badge.svg?branch=github-actions)](https://coveralls.io/github/filisko/pdo-plus?branch=github-actions)
+[![tests](https://github.com/filisko/pdo-plus/actions/workflows/tests.yml/badge.svg)](https://github.com/filisko/pdo-plus/actions/workflows/tests.yml)
 
 PDO plus extends PDO in order to log all your queries. This package also includes a Bar Panel for Tracy (useful for legacy projects), see the result below.
 
