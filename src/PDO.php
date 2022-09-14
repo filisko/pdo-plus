@@ -26,6 +26,7 @@ class PDO extends NativePdo
     /**
      * @inheritDoc
      */
+    #[\ReturnTypeWillChange]
     public function exec($statement)
     {
         $start = microtime(true);
@@ -38,6 +39,7 @@ class PDO extends NativePdo
     /**
      * @inheritDoc
      */
+    #[\ReturnTypeWillChange]
     public function query($statement, $mode = PDO::FETCH_ASSOC, ...$ctorargs)
     {
         $start = microtime(true);
