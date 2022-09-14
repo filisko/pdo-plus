@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": "^7.2 || ^7.3 || ^7.4",
+        "php": "^7.0",
         "ext-pdo": "*"
     },
     "require-dev": {
@@ -29,5 +29,10 @@
     "scripts": {
         "test": "php ./vendor/bin/phpunit",
         "cs-fix": "php ./vendor/bin/php-cs-fixer fix . "
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true
+        }
     }
 }
