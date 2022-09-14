@@ -31,6 +31,8 @@ jobs:
         uses: nanasess/setup-php@v3.0.6
         with:
           php-version: ${{ matrix.php }}
+      - name: use LTS version of composer
+        run: composer self-update --2.2
       - name: validate composer.json and composer.lock
         run: composer validate --strict
       - name: prepare test environment
