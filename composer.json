@@ -33,5 +33,10 @@
     "scripts": {
         "test": "XDEBUG_MODE=coverage php ./vendor/bin/phpunit",
         "cs-fix": "php ./vendor/bin/php-cs-fixer fix . "
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": false
+        }
     }
 }
