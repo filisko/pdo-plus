@@ -19,20 +19,19 @@ jobs:
     strategy:
       matrix:
         include:
-          - php: '7.0'
           - php: '7.1'
           - php: '7.2'
           - php: '7.3'
           - php: '7.4'
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: setup php
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-      - name: use LTS version of composer
-        run: composer self-update --2.2
+#      - name: use LTS version of composer
+#        run: composer self-update --2.2
       - name: validate composer.json and composer.lock
         run: composer validate --strict
       - name: prepare test environment
