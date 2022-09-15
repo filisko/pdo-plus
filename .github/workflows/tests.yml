@@ -28,7 +28,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: setup php
-        uses: nanasess/setup-php@v3.0.6
+        uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
       - name: use LTS version of composer
