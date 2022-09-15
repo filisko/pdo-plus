@@ -30,13 +30,14 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-#      - name: use LTS version of composer
-#        run: composer self-update --2.2
+      - name: use LTS version of composer
+        run: composer self-update --2.2
       - name: validate composer.json and composer.lock
         run: composer validate --strict
       - name: prepare test environment
         run: |
           composer install
+          composer upgrade
       - name: execute unit tests
         run: composer run-script test
 #      - name: upload coverage
