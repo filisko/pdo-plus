@@ -6,7 +6,6 @@ use PDO as NativePdo;
 class PDO extends NativePdo
 {
     /**
-     * Logged queries.
      * @var array
      */
     protected $log = [];
@@ -44,8 +43,10 @@ class PDO extends NativePdo
 
     /**
      * Add query to logged queries.
+     *
      * @param string $statement
      * @param float $time Elapsed seconds with microseconds
+     * @return void
      */
     public function addLog($statement, $time)
     {
@@ -53,12 +54,14 @@ class PDO extends NativePdo
             'statement' => $statement,
             'time' => $time * 1000
         ];
+
         $this->log[] = $query;
     }
 
     /**
      * Return logged queries.
-     * @return array<array{statement:string, time:float}> Logged queries
+     *
+     * @return array<array{statement:string, time:float}>
      */
     public function getLog()
     {
