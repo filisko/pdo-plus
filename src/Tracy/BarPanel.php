@@ -21,32 +21,25 @@ class BarPanel implements IBarPanel
 
     /**
      * Title
-     * @var string
      */
-    public $title = 'PDO logger';
+    public string $title = 'PDO logger';
 
     /**
      * Title HTML attributes
-     * @var string
      */
-    public $title_attributes = 'style="font-size:1.6em"';
+    public string $title_attributes = 'style="font-size:1.6em"';
 
     /**
      * Time table cell HTML attributes
-     * @var string
      */
-    public $time_attributes = 'style="font-weight:bold;color:#333;font-family:Courier New;font-size:1.1em"';
+    public string $time_attributes = 'style="font-weight:bold;color:#333;font-family:Courier New;font-size:1.1em"';
 
     /**
      * Query table cell HTML attributes
-     * @var string
      */
-    public $query_attributes = '';
+    public string $query_attributes = '';
 
-    /**
-     * @var PDO
-     */
-    private $pdo;
+    private PDO $pdo;
 
     public function __construct(PDO $pdo)
     {
@@ -55,18 +48,16 @@ class BarPanel implements IBarPanel
 
     /**
      * Get total queries execution time
-     * @return string
      */
-    protected function getTotalTime()
+    protected function getTotalTime(): string
     {
         return (string) round(array_sum(array_column($this->pdo->getLog(), 'time')), 4);
     }
 
     /**
      * Renders HTML code for custom tab.
-     * @return string
      */
-    public function getTab()
+    public function getTab(): string
     {
         $html = '<img src="'.$this->icon.'" alt="PDO queries logger" /> ';
         $queries = count($this->pdo->getLog());
@@ -86,7 +77,7 @@ class BarPanel implements IBarPanel
      * Renders HTML code for custom panel.
      * @return string
      */
-    public function getPanel()
+    public function getPanel(): string
     {
         if (class_exists('\SqlFormatter')) {
             \SqlFormatter::$pre_attributes = 'style="color: black;"';
