@@ -15,6 +15,12 @@ class PDO extends NativePdo
     protected $log = [];
 
     /**
+     * Control the logging state.
+     * @var bool
+     */
+    protected $loggingEnabled = true;
+
+    /**
      * @inheritDoc
      */
     public function __construct($dsn, $username = null, $passwd = null, $options = null)
@@ -56,10 +62,12 @@ class PDO extends NativePdo
      */
     public function addLog(string $statement, float $time): void
     {
-        $this->log[] = [
-            'statement' => $statement,
-            'time' => $time * 1000
-        ];
+        if ($this->loggingEnabled) {
+            $this->log[] = [
+                'statement' => $statement,
+                'time' => $time * 1000
+            ];
+        }
     }
 
     /**
@@ -69,5 +77,22 @@ class PDO extends NativePdo
     public function getLog(): array
     {
         return $this->log;
+    }
+
+
+    /**
+     * Enables query logging.
+     */
+    public function enableLogging(): void
+    {
+        $this->loggingEnabled = true;
+    }
+
+    /**
+     * Disables query logging.
+     */
+    public function disableLogging(): void
+    {
+        $this->loggingEnabled = false;
     }
 }
