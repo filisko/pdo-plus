@@ -27,11 +27,11 @@ class PDOStatement extends NativePdoStatement
      * @inheritDoc
      */
     public function bindParam(
-        $param,
-        &$var,
-        $type = PDO::PARAM_STR,
-        $maxLength = null,
-        $driverOptions = null
+        int|string $param,
+        mixed &$var,
+        int $type = PDO::PARAM_STR,
+        int $maxLength = 0,
+        mixed $driverOptions = null
     ): bool {
         $this->bindings[$param] = $var;
         return parent::bindParam($param, $var, $type, $maxLength, $driverOptions);
@@ -40,7 +40,7 @@ class PDOStatement extends NativePdoStatement
     /**
      * @inheritDoc
      */
-    public function bindValue($param, $value, $type = PDO::PARAM_STR): bool
+    public function bindValue(string|int $param, mixed $value, int $type = PDO::PARAM_STR): bool
     {
         $this->bindings[$param] = $value;
         return parent::bindValue($param, $value, $type);
@@ -49,7 +49,7 @@ class PDOStatement extends NativePdoStatement
     /**
      * @inheritDoc
      */
-    public function execute($params = null)
+    public function execute(?array $params = null): bool
     {
         if (is_array($params)) {
             $this->bindings = $params;
