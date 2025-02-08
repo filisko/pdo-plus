@@ -1,3 +1,4 @@
+
 name: tests
 
 on:
@@ -26,22 +27,23 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
-      - name: setup php
+      - name: Setup PHP Action
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-      - name: use LTS version of composer
-        run: composer self-update --2.2
-      - name: validate composer.json and composer.lock
-        run: composer validate --strict
-      - name: prepare test environment
+      - name: composer setup
         run: |
+          # create folder for coverage
+          mkdir -p build/logs
+        
+          # different PHP versions require different deps          
+          composer update
           composer install
-          composer upgrade
+
       - name: execute unit tests
-        run: composer run-script test
-#      - name: upload coverage
-#        env:
-#          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: |
-#          php vendor/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
+        run: composer test
+      - name: upload coverage
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          php vendor/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
