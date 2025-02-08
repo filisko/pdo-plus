@@ -39,12 +39,12 @@ class PDO extends NativePdo
     /**
      * @inheritDoc
      */
-    public function query(string $statement, ?int $mode = PDO::FETCH_ASSOC, ...$ctorargs): PDOStatement|false
+    public function query(string $query, ?int $fetchMode = PDO::FETCH_ASSOC, ...$ctorargs): PDOStatement|false
     {
         $start = microtime(true);
-        $result = parent::query($statement, $mode, ...$ctorargs);
+        $result = parent::query($query, $fetchMode, ...$ctorargs);
 
-        $this->addLog($statement, microtime(true) - $start);
+        $this->addLog($query, microtime(true) - $start);
 
         return $result;
     }

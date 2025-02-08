@@ -2,7 +2,7 @@
 
 sudo add-apt-repository ppa:ondrej/php -y
 
-declare -a phps=("8.0" "8.1" "8.2" "8.3")
+declare -a phps=("8.0" "8.1" "8.2" "8.3" "8.4")
 
 declare -a exts=("ast" "xdebug" "pdo" "mysqli" "curl" "gd" "mbstring" "mysql" "zip" "tidy" "xml" "sqlite3" "dom" "tokenizer" "xmlwriter" "mbstring" "bcmath" "bz2" "intl")
 

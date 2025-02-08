@@ -8,10 +8,10 @@ PDO plus extends PDO in order to log all your queries. This package also include
 
 ## Versions
 
-| Release | Supported PHP versions |
-| --- | --- |
-| 4.x.x / master (here now) | 8.0 |
-| [3.x.x](https://github.com/filisko/pdo-plus/tree/3.x.x) | 7.2, 7.3, 7.4 |
+| Release | Supported PHP versions  |
+| --- |-------------------------|
+| 4.x.x / master (here now) | 8.0, 8.1, 8.2, 8.3, 8.4 |
+| [3.x.x](https://github.com/filisko/pdo-plus/tree/3.x.x) | 7.2, 7.3, 7.4           |
 
 
 ## Installation

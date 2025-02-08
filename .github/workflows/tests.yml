@@ -11,8 +11,8 @@ on:
       - reopened
     branches:
       - 'master'
-  schedule:
-    - cron: '1 9 * * 0'
+#  schedule:
+#    - cron: '1 9 * * 0'
 
 jobs:
   test_unit:
@@ -22,22 +22,30 @@ jobs:
       matrix:
         include:
           - php: '8.0'
+          - php: '8.1'
+          - php: '8.2'
+          - php: '8.3'
+          - php: '8.4'
     steps:
       - name: checkout
-        uses: actions/checkout@v2
-      - name: setup php
-        uses: nanasess/setup-php@v3.0.6
+        uses: actions/checkout@v3
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-      - name: validate composer.json and composer.lock
-        run: composer validate --strict
-      - name: prepare test environment
+      - name: composer setup
         run: |
+          # create folder for coverage
+          mkdir -p build/logs
+        
+          # different PHP versions require different deps          
+          composer update
           composer install
+
       - name: execute unit tests
-        run: composer run-script test
-#      - name: upload coverage
-#        env:
-#          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: |
-#          php vendor/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
+        run: composer test
+      - name: upload coverage
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          php vendor/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
