@@ -10,7 +10,8 @@ class PDO extends NativePdo
 {
     /**
      * Logged queries.
-     * @var array<array>
+     *
+     * @var array<array<string,string|float>>
      */
     protected array $log = [];
 
