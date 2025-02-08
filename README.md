@@ -52,10 +52,30 @@ $db2Panel->title = "DB 2 Panel";
 \Tracy\Debugger::getBar()->addPanel($db2Panel);
 ```
 
-## Tests
+## Dev environment setup & tests
 
-Run tests:
+Build docker image:
 
 ```shell
-composer run-script test
+./dev/build.sh
+```
+
+Run tests for all PHP versions:
+
+```shell
+./run_tests.sh
+
+# in case of one specific version
+./run_tests.sh 8.2
+
+# simply with composer
+composer test
+```
+
+Shell into the Docker image:
+```shell
+./dev/shell.sh
+
+# change PHP version?:
+./switch_php.sh 8.1
 ```

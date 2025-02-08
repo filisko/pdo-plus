@@ -29,8 +29,7 @@
         "php-coveralls/php-coveralls": "^2.4"
     },
     "scripts": {
-        "test": "XDEBUG_MODE=coverage php ./vendor/bin/phpunit",
-        "cs-fix": "php ./vendor/bin/php-cs-fixer fix . "
+        "test": "XDEBUG_MODE=coverage php ./vendor/bin/phpunit"
     },
     "config": {
         "allow-plugins": {
