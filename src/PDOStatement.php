@@ -32,7 +32,7 @@ class PDOStatement extends NativePdoStatement
         $type = PDO::PARAM_STR,
         $maxLength = null,
         $driverOptions = null
-    ) {
+    ): bool {
         $this->bindings[$param] = $var;
         return parent::bindParam($param, $var, $type, $maxLength, $driverOptions);
     }
@@ -40,7 +40,7 @@ class PDOStatement extends NativePdoStatement
     /**
      * @inheritDoc
      */
-    public function bindValue($param, $value, $type = PDO::PARAM_STR)
+    public function bindValue($param, $value, $type = PDO::PARAM_STR): bool
     {
         $this->bindings[$param] = $value;
         return parent::bindValue($param, $value, $type);

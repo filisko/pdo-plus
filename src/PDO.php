@@ -10,9 +10,10 @@ class PDO extends NativePdo
 {
     /**
      * Logged queries.
-     * @var array<array>
+     *
+     * @var array<array<string,string|float>>
      */
-    protected $log = [];
+    protected array $log = [];
 
     /**
      * @inheritDoc
@@ -23,10 +24,7 @@ class PDO extends NativePdo
         $this->setAttribute(self::ATTR_STATEMENT_CLASS, [PDOStatement::class, [$this]]);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function exec($statement)
+    public function exec($statement): int|false
     {
         $start = microtime(true);
         $result = parent::exec($statement);
@@ -35,10 +33,7 @@ class PDO extends NativePdo
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function query($statement, $mode = PDO::FETCH_ASSOC, ...$ctorargs)
+    public function query($statement, $mode = PDO::FETCH_ASSOC, ...$ctorargs): PDOStatement|false
     {
         $start = microtime(true);
         $result = parent::query($statement, $mode, ...$ctorargs);
