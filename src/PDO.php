@@ -11,7 +11,7 @@ class PDO extends NativePdo
     /**
      * Logged queries.
      *
-     * @var array<array<string,string|float>>
+     * @var array<array{statement:string, time:float}> Logged queries
      */
     protected array $log = [];
 
@@ -65,6 +65,7 @@ class PDO extends NativePdo
 
     /**
      * Return logged queries.
+     *
      * @return array<array{statement:string, time:float}> Logged queries
      */
     public function getLog(): array
