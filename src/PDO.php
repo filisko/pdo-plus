@@ -10,9 +10,10 @@ class PDO extends NativePdo
 {
     /**
      * Logged queries.
-     * @var array<array>
+     *
+     * @var array<array{statement:string, time:float}> Logged queries
      */
-    protected $log = [];
+    protected array $log = [];
 
     /**
      * Control the logging state.
@@ -23,7 +24,7 @@ class PDO extends NativePdo
     /**
      * @inheritDoc
      */
-    public function __construct($dsn, $username = null, $passwd = null, $options = null)
+    public function __construct(string $dsn, ?string $username = null, ?string $passwd = null, ?array $options = null)
     {
         parent::__construct($dsn, $username, $passwd, $options);
         $this->setAttribute(self::ATTR_STATEMENT_CLASS, [PDOStatement::class, [$this]]);
@@ -32,7 +33,7 @@ class PDO extends NativePdo
     /**
      * @inheritDoc
      */
-    public function exec($statement)
+    public function exec(string $statement): int|false
     {
         $start = microtime(true);
         $result = parent::exec($statement);
@@ -44,12 +45,12 @@ class PDO extends NativePdo
     /**
      * @inheritDoc
      */
-    public function query($statement, $mode = PDO::FETCH_ASSOC, ...$ctorargs)
+    public function query(string $query, ?int $fetchMode = PDO::FETCH_ASSOC, ...$ctorargs): PDOStatement|false
     {
         $start = microtime(true);
-        $result = parent::query($statement, $mode, ...$ctorargs);
+        $result = parent::query($query, $fetchMode, ...$ctorargs);
 
-        $this->addLog($statement, microtime(true) - $start);
+        $this->addLog($query, microtime(true) - $start);
 
         return $result;
     }
@@ -72,6 +73,7 @@ class PDO extends NativePdo
 
     /**
      * Return logged queries.
+     *
      * @return array<array{statement:string, time:float}> Logged queries
      */
     public function getLog(): array

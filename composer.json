@@ -23,16 +23,13 @@
     },
     "require-dev": {
         "ext-sqlite3": "*",
-        "phpunit/phpunit": "^9.5",
-        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpunit/phpunit": "^9.6",
         "phpstan/phpstan": "^0.12.89",
         "tracy/tracy": "^2.8",
-        "infection/infection": "^0.23.0",
         "php-coveralls/php-coveralls": "^2.4"
     },
     "scripts": {
-        "test": "XDEBUG_MODE=coverage php ./vendor/bin/phpunit",
-        "cs-fix": "php ./vendor/bin/php-cs-fixer fix . "
+        "test": "XDEBUG_MODE=coverage php ./vendor/bin/phpunit"
     },
     "config": {
         "allow-plugins": {

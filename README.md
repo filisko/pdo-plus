@@ -8,10 +8,10 @@ PDO plus extends PDO in order to log all your queries. This package also include
 
 ## Versions
 
-| Release | Supported PHP versions |
-| --- | --- |
-| 4.x.x / master (here now) | 8.0 |
-| [3.x.x](https://github.com/filisko/pdo-plus/tree/3.x.x) | 7.2, 7.3, 7.4 |
+| Release | Supported PHP versions  |
+| --- |-------------------------|
+| 4.x.x / master (here now) | 8.0, 8.1, 8.2, 8.3, 8.4 |
+| [3.x.x](https://github.com/filisko/pdo-plus/tree/3.x.x) | 7.2, 7.3, 7.4           |
 
 
 ## Installation
@@ -52,10 +52,30 @@ $db2Panel->title = "DB 2 Panel";
 \Tracy\Debugger::getBar()->addPanel($db2Panel);
 ```
 
-## Tests
+## Dev environment setup & tests
 
-Run tests:
+Build docker image:
 
 ```shell
-composer run-script test
+./dev/build.sh
+```
+
+Run tests for all PHP versions:
+
+```shell
+./run_tests.sh
+
+# in case of one specific version
+./run_tests.sh 8.2
+
+# simply with composer
+composer test
+```
+
+Shell into the Docker image:
+```shell
+./dev/shell.sh
+
+# change PHP version?:
+./switch_php.sh 8.1
 ```
